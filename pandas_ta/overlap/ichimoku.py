@@ -26,12 +26,12 @@ def ichimoku(high, low, close, tenkan=None, kijun=None, senkou=None, include_chi
     span_b = midprice(high=high, low=low, length=senkou)
 
     # Copy Span A and B values before their shift
-    _span_a = span_a[-kijun:].copy()
-    _span_b = span_b[-kijun:].copy()
+    _span_a = span_a[-kijun:].shift(-1).copy()
+    _span_b = span_b[-kijun:].shift(-1).copy()
 
-    span_a = span_a.shift(kijun)
-    span_b = span_b.shift(kijun)
-    chikou_span = close.shift(-kijun)
+    span_a = span_a.shift(kijun - 1)
+    span_b = span_b.shift(kijun - 1)
+    chikou_span = close.shift(-kijun + 1)
 
     # Offset
     if offset != 0:
